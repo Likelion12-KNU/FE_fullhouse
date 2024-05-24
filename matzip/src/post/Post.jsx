@@ -1,14 +1,14 @@
 import React from 'react'
 import '../style/Post.css'
 
-function Post({ title, content }) {
+function Post(props) {
     return (
         <div className='post'>
             <div>
-                <img
-                    src='../public/bread.gif' />
+                <h2>{props.title}</h2>
+                {/* <img src={props.src} /> */}
                 <li>
-                    포스트입니다. 테스트 테스트.
+                    {props.article}
                 </li>
             </div>
             <p />
