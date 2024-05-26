@@ -1,0 +1,110 @@
+
+#root {
+  margin: 0 auto auto auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+header {
+  margin: 20px auto 20px auto;
+}
+
+header a {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 76px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: black;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: black;
+}
+
+.buttons {
+  float: right;
+}
+
+.buttons a {
+  text-align: right;
+  height: 50px;
+  width: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: inline-block;
+  margin: 10px 10px 10px 10px;
+  padding: 5px;
+}
+
+.navi nav {
+  clear: both;
+  text-align: center;
+  border-top: 3px solid rgb(0, 0, 0);
+  border-bottom: 3px solid rgb(0, 0, 0);
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around; 
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navi nav a {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: black;
+  display: inline;
+}
+
+.navi nav a:hover {
+  color: gray;
+}
+
+.navi .matBar {
+  display: none;
+  position: absolute;
+  top: 60px; /* 필요한 위치로 조정 */
+  left: 50%; /* 화면 중앙에 맞추기 위해 조정 */
+  transform: translateX(-50%); /* 중앙 정렬 */
+  margin-top: 10px;
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  justify-content: space-around;
+  z-index: 1;
+}
+
+.navi .matBar a {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: black;
+  display: inline;
+}
+
+.navi .matBar a:hover {
+  background-color: #f0f0f0;
+}
+
+.navi nav a:nth-child(3):hover + .matBar {
+  display: flex;
+}
