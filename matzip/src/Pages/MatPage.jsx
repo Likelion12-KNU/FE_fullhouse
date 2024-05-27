@@ -1,9 +1,14 @@
 import React from 'react';
+import PostForm from './elements/PostForm';
+import Post from './elements/Post';
+import PostList from './elements/PostList';
 
 function MatPage() {
     return (
         <>
-        <h1>맛집 게시판 페이지 입니다.</h1>
+        {/* <h1>맛집 게시판 페이지 입니다.</h1> */}
+            <PostForm />
+            <PostList />
         </>
     );
 }

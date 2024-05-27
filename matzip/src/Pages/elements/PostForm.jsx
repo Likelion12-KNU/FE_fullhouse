@@ -1,7 +1,8 @@
 import { baseUrl } from "../../config/const";
 import { useState } from "react";
-import Post from "../PostList/Post/Post";
 import { getPosts } from "../../func/request";
+import "../../style/PostForm.css"
+// import Post from "../../components/PostList/Post/Post";
 
 function PostForm() {
   // 상태 관리를 위한 useState 훅 사용
@@ -28,47 +29,37 @@ function PostForm() {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+    <div className="root">
       <form onSubmit={handleSubmit}>
-        <div className="mb-6">
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
-          >
+        <div className="FormHeader">
+          <label htmlFor="title">
             게시글 제목
           </label>
           <input
             type="text"
             id="title"
             name="title"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="input"
             placeholder="제목을 입력하세요"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div className="mb-6">
-          <label
-            htmlFor="content"
-            className="block text-sm font-medium text-gray-700"
-          >
+        <div className="FormBody">
+          <label htmlFor="content">
             게시글 내용
           </label>
           <textarea
             id="content"
             name="content"
             rows="4"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="내용을 입력하세요"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
         </div>
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="px-6 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
+        <div className="btn">
+          <button type="submit">
             전송
           </button>
         </div>

@@ -1,4 +1,4 @@
-import { baseUrl } from "../../../config/const";
+import { baseUrl } from "../config/const";
 /* eslint-disable react/prop-types */
 function Post({ title, content }) {
   const handleDelete = () => {

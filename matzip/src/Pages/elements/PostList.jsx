@@ -1,8 +1,9 @@
-import Post from "./Post/Post";
+import Post from "../../components/Post";
 import { useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { postsAtom } from "../../state/atom";
 import { getPosts } from "../../func/request";
+import "../../style/PostList.css"
 
 function PostList() {
   /*

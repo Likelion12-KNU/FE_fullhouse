@@ -1,13 +1,15 @@
 import React from 'react';
-import '../../style/Post.css'
+import '../../style/Post.css';
+// import { baseUrl } from "../../../config/const";
 
-function Post() {
+// del 여기 구현
+function Post({ title, content }) {
     return (
         <div className='post'>
-            <img src=''></img>
-            <header>제목</header>
-            <p>게시글 내용</p>
+            {/* <img src=''></img> */}
+            <h2>{title}</h2>
+            <p>{content}</p>
         </div>
     );
 }
-export default Post
+export default Post;
