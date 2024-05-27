@@ -1,0 +1,16 @@
+{
+    "posts" : [
+        {
+            "title" : "제목임",
+            "contents" : "내용임"
+        },
+        {
+            "title" : "제목임",
+            "contents" : "내용임"
+        },
+        {
+            "title" : "제목임",
+            "contents" : "내용임"
+        }
+    ]
+}
