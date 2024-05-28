@@ -1,1 +1,1 @@
-export const baseUrl = 'http://localhost:3001';
+export const baseUrl = 'http://lion-matzip.duckdns.org/api';
