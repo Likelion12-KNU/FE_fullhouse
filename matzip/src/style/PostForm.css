@@ -5,6 +5,7 @@
     height: 250px;
     background-color: whitesmoke;
     border-radius: 20px;
+    display: block;
 }
 
 .FormHeader {

@@ -1,4 +1,4 @@
-import Post from "../../components/Post";
+import Post from "./Post";
 import { useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { postsAtom } from "../../state/atom";
@@ -16,11 +16,11 @@ function PostList() {
   useEffect(() => { getPosts(); }, []);
 
   return (
-    <>
+    <div className="list">
       {posts && posts.map((v) => (
         <Post key={v.id} id={v.id} title={v.title} content={v.content} />
       ))}
-    </>
+    </div>
   );
 }
 
