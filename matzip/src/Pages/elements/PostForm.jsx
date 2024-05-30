@@ -40,7 +40,7 @@ function PostForm() {
             id="title"
             name="title"
             className="input"
-            placeholder="제목을 입력하세요"
+            placeholder=" 제목을 입력하세요"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -53,9 +53,10 @@ function PostForm() {
             id="content"
             name="content"
             rows="4"
-            placeholder="내용을 입력하세요"
+            placeholder=" 내용을 입력하세요"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            className="text"
           ></textarea>
         </div>
         <div className="btn">

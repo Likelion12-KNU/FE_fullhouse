@@ -4,11 +4,13 @@ import style from '../style/SearchPage.module.css'
 function SearchPage() {
     return (
         <>
-        <h1>검색 페이지 입니다.</h1>
-        <form>
-            <input type='text' placeholder='Search...'></input>
-            <input type='submit' value={""}></input>
+        <form className={style.searchform}>
+            <div className={style.searchcover}>
+                <input type='text' placeholder='Search...' className={style.search}/>
+            </div>
+            <input type='submit' value={""} className={style.sub}></input>
         </form>
+        <h1 className={style.h1}>Search Result</h1>
         </>
     );
 }

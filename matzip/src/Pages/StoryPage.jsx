@@ -1,8 +1,11 @@
 import React from 'react';
+import style from '../style/StoryPage.module.css'
 
 function StoryPage() {
     return (
-        <h1>스토리 게시판 페이지 입니다.</h1>
+        <>
+        <h1 className={style.h1}>story</h1>
+        </>
     );
 }
 export default StoryPage

@@ -1,23 +1,72 @@
 .root {
     margin: 30px auto;
     padding: 15px;
-    width: 50%;
-    height: 250px;
+    width: 80%;
+    height: auto; /* height를 auto로 변경하여 내용에 맞게 조절되도록 함 */
     background-color: whitesmoke;
     border-radius: 20px;
     display: block;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: 'Pretendard';
+  font-style: normal;
 }
 
-.FormHeader {
+.FormHeader, .FormBody {
     margin: 15px auto;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .btn {
     margin: 10px;
-    width: 75px;
-    height: 25px;
-    border-radius: 5px;
-    float: right;
-    background-color: skyblue;
+    width: 100%; /* 버튼을 전체 너비로 설정 */
+    display: flex;
+    justify-content: flex-end; /* 버튼을 오른쪽 끝에 정렬 */
+    padding-right: 10px;
+}
 
+button {
+    width: 70px;
+    height: 40px;
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 커서 변경 */
+    border-radius: 10px;
+    background-color: lightgray !important;
+}
+
+.input {
+    height: 40px;
+}
+
+.text {
+    height: 400px;
+}
+
+.input {
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: block;
+}
+
+.text {
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: block;
+}
+
+.input:hover, .text:hover, .input:focus, .text:focus {
+    border: 1px solid rgb(177, 177, 177);
+    outline: none;
 }
