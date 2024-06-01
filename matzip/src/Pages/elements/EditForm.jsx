@@ -1,7 +1,7 @@
 import { baseUrl, query } from "../../config/const";
 import { useState } from "react";
 import { getPosts } from "../../func/request";
-// import "../../style/PostForm.css"
+import "../../style/PostForm.css"
 
 function EditForm({ id, curtitle, curcontents, onClose }) {
   // 상태 관리를 위한 useState 훅 사용
@@ -56,6 +56,7 @@ function EditForm({ id, curtitle, curcontents, onClose }) {
             placeholder="내용을 입력하세요"
             value={contents}
             onChange={(e) => setContents(e.target.value)}
+            className="textEdit"
           ></textarea>
         </div>
         <div className="btn">

@@ -64,6 +64,18 @@ button {
     box-sizing: border-box;
     padding: 10px;
     display: block;
+    resize: none;
+}
+
+.textEdit {
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: block;
+    height: 270px;
+    resize: none;
 }
 
 .input:hover, .text:hover, .input:focus, .text:focus {
