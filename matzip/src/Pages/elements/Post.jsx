@@ -5,17 +5,10 @@ import { getPosts } from "../../func/request";
 import EditForm from "./EditForm";
 
 // content -> contents - by choigw
-function Post({ id, title, contents }) {
+function Post({ id, title, contents, likes }) {
+    const [like, setLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const handleEdit = () => {
-        // fetch(`${baseUrl}/${id}`, {
-        //     method: "PUT",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({
-        //         title: "수정 제목",
-        //         contents: "수정 내용"
-        //       })
-        // }).then(() => getPosts());
         setEditing(true);
     };
 
@@ -29,6 +22,21 @@ function Post({ id, title, contents }) {
             headers: { "Content-Type": "application/json" }
         }).then(() => getPosts());
     };
+
+    const handleLike = () => {
+        setLike(like+1);
+        console.log(id+" "+like);
+        //PUT : like - back 미구현 240602
+        // fetch(`${baseUrl}/${id}`, {
+        //     method: "PUT",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({
+        //         likes: like
+        //     })
+        // }).then(() => getPosts());
+    }
+
+
     return (
         <div className='post'>
             {isEditing ? (
@@ -43,17 +51,17 @@ function Post({ id, title, contents }) {
                     <h2>{title}</h2>
                     <p>{contents}</p>
 
+                    <div className="likes">
+                        <button onClick={handleLike}>
+                            좋아요
+                        </button>
+                        <span> {likes}개</span>
+                    </div>
                     <div className="flex justify-end mt-4">
-                        <button
-                            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                            onClick={handleEdit}
-                        >
+                        <button onClick={handleEdit}>
                             수정
                         </button>
-                        <button
-                            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                            onClick={handleDelete}
-                        >
+                        <button onClick={handleDelete}>
                             삭제
                         </button>
                     </div>

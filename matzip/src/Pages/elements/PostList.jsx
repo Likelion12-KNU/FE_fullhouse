@@ -7,19 +7,18 @@ import "../../style/PostList.css"
 
 function PostList() {
   /*
-        { id: number, title: string, contents: string }
+        { id: number, title: string, contents: string, like: number }
   */
   const posts = useAtomValue(postsAtom);
 
   // 처음 랜더링 될때만 실행
-  // useEffect 를 쓰지 않는다면 어떻게 될까요? 
   useEffect(() => { getPosts(); }, []);
 
   return (
     <>
       {posts.boardLists && posts.boardLists.map((v, index) => (
         // content -> contents - by choigw
-        <Post key={index} id={v.id} title={v.title} contents={v.contents} />
+        <Post key={index} id={v.id} title={v.title} contents={v.contents} likes={v.likes} />
       ))}
     </>
   );
