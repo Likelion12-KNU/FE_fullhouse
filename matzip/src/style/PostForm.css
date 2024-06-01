@@ -1,0 +1,22 @@
+.root {
+    margin: 30px auto;
+    padding: 15px;
+    width: 50%;
+    height: 250px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+}
+
+.FormHeader {
+    margin: 15px auto;
+}
+
+.btn {
+    margin: 10px;
+    width: 75px;
+    height: 25px;
+    border-radius: 5px;
+    float: right;
+    background-color: skyblue;
+
+}

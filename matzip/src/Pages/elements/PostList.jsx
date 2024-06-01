@@ -1,12 +1,13 @@
-import Post from "./Post/Post";
+import Post from "./Post";
 import { useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { postsAtom } from "../../state/atom";
 import { getPosts } from "../../func/request";
+import "../../style/PostList.css"
 
 function PostList() {
   /*
-        { id: nuber, title: string, content: string }
+        { id: number, title: string, contents: string }
   */
   const posts = useAtomValue(postsAtom);
 
@@ -16,8 +17,9 @@ function PostList() {
 
   return (
     <>
-      {posts && posts.map((v) => (
-        <Post key={v.id} id={v.id} title={v.title} content={v.content} />
+      {posts.boardLists && posts.boardLists.map((v, index) => (
+        // content -> contents - by choigw
+        <Post key={index} id={v.id} title={v.title} contents={v.contents} />
       ))}
     </>
   );
