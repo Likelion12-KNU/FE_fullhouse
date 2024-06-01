@@ -1,36 +1,35 @@
 import { baseUrl, query } from "../../config/const";
 import { useState } from "react";
 import { getPosts } from "../../func/request";
-import "../../style/PostForm.css"
-// import Post from "../../components/PostList/Post/Post";
+// import "../../style/PostForm.css"
 
-function PostForm() {
+function EditForm({ id, curtitle, curcontents, onClose }) {
   // 상태 관리를 위한 useState 훅 사용
-  const [title, setTitle] = useState("");
-  // 주의::content -> contents / setContent -> setContents - 240530 by choigw
-  const [contents, setContents] = useState("");
+  const [title, setTitle] = useState(curtitle);
+  const [contents, setContents] = useState(curcontents);
 
-  // 폼 제출 이벤트 핸들러
+  // 폼 수정 이벤트 핸들러
   const handleSubmit = (event) => {
     event.preventDefault();
-    setTitle("");
-    setContents("");
-    
-    // [POST] ${baseUrl}/posts
-    fetch(`${baseUrl}`,
+
+    // [PUT] ${baseUrl}/${id}
+    fetch(`${baseUrl}/${id}`,
       {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: title,
           contents: contents
         })
       }
-    ).then(() => getPosts());
+    ).then(() => {
+      getPosts();
+      onClose();
+    });
   };
 
   return (
-    <div className="root">
+    <div className="editform">
       <form onSubmit={handleSubmit}>
         <div className="FormHeader">
           <label htmlFor="title">
@@ -41,7 +40,7 @@ function PostForm() {
             id="title"
             name="title"
             className="input"
-            placeholder=" 제목을 입력하세요"
+            placeholder="제목을 입력하세요"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -57,12 +56,11 @@ function PostForm() {
             placeholder="내용을 입력하세요"
             value={contents}
             onChange={(e) => setContents(e.target.value)}
-            className="text"
           ></textarea>
         </div>
         <div className="btn">
           <button type="submit">
-            전송
+            수정
           </button>
         </div>
       </form>
@@ -70,4 +68,4 @@ function PostForm() {
   );
 }
 
-export default PostForm;
+export default EditForm;

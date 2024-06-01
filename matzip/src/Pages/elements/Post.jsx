@@ -1,14 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from '../../style/Post.module.css';
-// import { baseUrl } from "../../../config/const";
+import { baseUrl } from "../../config/const";
+import { getPosts } from "../../func/request";
+import EditForm from "./EditForm";
+import editimg from '../../img/edit.png'
+import delimg from "../../img/delete.png"
 
-// del 여기 구현
-function Post({ title, content }) {
+// content -> contents - by choigw
+function Post({ id, title, contents }) {
+    const [isEditing, setEditing] = useState(false);
+    const handleEdit = () => {
+        // fetch(`${baseUrl}/${id}`, {
+        //     method: "PUT",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({
+        //         title: "수정 제목",
+        //         contents: "수정 내용"
+        //       })
+        // }).then(() => getPosts());
+        setEditing(true);
+    };
+
+    const handleCloseForm = () => {
+        setEditing(false);
+    }
+
+    const handleDelete = () => {
+        fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        }).then(() => getPosts());
+    };
     return (
         <div className={style.post}>
-            {/* <img src=''></img> */}
-            <h2>{title}</h2>
-            <p>{content}</p>
+            {isEditing ? (
+                <EditForm
+                    id={id}
+                    curtitle={title}
+                    curcontents={contents}
+                    onClose={handleCloseForm}
+                />
+            ) : (
+                <>
+                    <h2>{title}</h2>
+                    <p>{contents}</p>
+
+                    <div className={style.edit}>
+                        <button
+                            className={style.e}
+                            onClick={handleEdit}
+                        >
+                            <img src={editimg}/>
+                        </button>
+                        <button
+                            className={style.d}
+                            onClick={handleDelete}
+                        >
+                            <img src={delimg}/>
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

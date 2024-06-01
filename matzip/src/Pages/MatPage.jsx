@@ -1,5 +1,6 @@
 import React from 'react';
 import PostForm from './elements/PostForm';
+import EditForm from './elements/EditForm';
 import Post from './elements/Post';
 import PostList from './elements/PostList';
 import style from "../style/MatPage.module.css"
