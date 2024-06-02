@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import '../../style/Post.css';
+import style from '../../style/Post.module.css';
 import { baseUrl } from "../../config/const";
 import { getPosts } from "../../func/request";
 import EditForm from "./EditForm";
+import editimg from '../../img/edit.png'
+import delimg from "../../img/delete.png"
 
 // content -> contents - by choigw
 function Post({ id, title, contents }) {
@@ -30,7 +32,7 @@ function Post({ id, title, contents }) {
         }).then(() => getPosts());
     };
     return (
-        <div className='post'>
+        <div className={style.post}>
             {isEditing ? (
                 <EditForm
                     id={id}
@@ -43,18 +45,18 @@ function Post({ id, title, contents }) {
                     <h2>{title}</h2>
                     <p>{contents}</p>
 
-                    <div className="flex justify-end mt-4">
+                    <div className={style.edit}>
                         <button
-                            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            className={style.e}
                             onClick={handleEdit}
                         >
-                            수정
+                            <img src={editimg}/>
                         </button>
                         <button
-                            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            className={style.d}
                             onClick={handleDelete}
                         >
-                            삭제
+                            <img src={delimg}/>
                         </button>
                     </div>
                 </>

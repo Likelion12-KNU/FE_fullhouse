@@ -16,12 +16,14 @@ function PostList() {
   useEffect(() => { getPosts(); }, []);
 
   return (
-    <>
+    <div className="list">
+      <div className="cover">
       {posts.boardLists && posts.boardLists.map((v, index) => (
         // content -> contents - by choigw
-        <Post key={index} id={v.id} title={v.title} contents={v.contents} />
+        <Post key={index} id={v.id} title={v.title} contents={v.contents} className="post" />
       ))}
-    </>
+      </div>
+    </div>
   );
 }
 
