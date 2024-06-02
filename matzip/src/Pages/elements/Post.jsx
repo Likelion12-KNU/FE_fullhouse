@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import '../../style/Post.css';
+import style from '../../style/Post.module.css';
 import { baseUrl } from "../../config/const";
 import { getPosts } from "../../func/request";
 import EditForm from "./EditForm";
+import editimg from '../../img/edit.png'
+import delimg from "../../img/delete.png"
 
 // content -> contents - by choigw
 function Post({ id, title, contents, likes }) {
@@ -37,7 +39,7 @@ function Post({ id, title, contents, likes }) {
 
 
     return (
-        <div className='post'>
+        <div className={style.post}>
             {isEditing ? (
                 <EditForm
                     id={id}
@@ -56,12 +58,18 @@ function Post({ id, title, contents, likes }) {
                         </button>
                         <span> {stateLike}개</span>
                     </div>
-                    <div className="flex justify-end mt-4">
-                        <button onClick={handleEdit}>
-                            수정
+                    <div className={style.edit}>
+                        <button
+                            className={style.e}
+                            onClick={handleEdit}
+                        >
+                            <img src={editimg}/>
                         </button>
-                        <button onClick={handleDelete}>
-                            삭제
+                        <button
+                            className={style.d}
+                            onClick={handleDelete}
+                        >
+                            <img src={delimg}/>
                         </button>
                     </div>
                 </>

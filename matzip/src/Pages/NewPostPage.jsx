@@ -1,9 +1,10 @@
 import React from "react";
+import PostForm from "./elements/PostForm";
 
 function NewPostPage() {
     return (
         <>
-            <h1>게시글 작성 페이지 입니다.</h1>
+            <PostForm/>
         </>
     )
 }
