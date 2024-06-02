@@ -1,3 +1,47 @@
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-Black.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-Bold.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-ExtraBold.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-ExtraLight.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-Light.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-Medium.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-Regular.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-SemiBold.otf") format('otf');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url("./style/Fonts/Pretendard-Thin.otf") format('otf');
+}
 
 #root {
   margin: 0 auto auto auto;
