@@ -26,7 +26,7 @@ function Post({ id, title, contents, likes }) {
     };
 
     const handleLike = () => {
-        setStateLike((prev) => prev+1);
+        setStateLike((prev) => prev + 1);
         //PUT : like - back 미구현 240602
         // fetch(`${baseUrl}/${id}`, {
         //     method: "PUT",
@@ -52,24 +52,25 @@ function Post({ id, title, contents, likes }) {
                     <h2>{title}</h2>
                     <p>{contents}</p>
 
-                    <div className="likes">
-                        <button onClick={handleLike}>
-                            좋아요
-                        </button>
-                        <span> {stateLike}개</span>
-                    </div>
                     <div className={style.edit}>
+                        <span> {stateLike}개</span>
+                        <button
+                            className={style.l}
+                            onClick={handleLike}
+                        >
+                            LIKE
+                        </button>
                         <button
                             className={style.e}
                             onClick={handleEdit}
                         >
-                            <img src={editimg}/>
+                            <img src={editimg} />
                         </button>
                         <button
                             className={style.d}
                             onClick={handleDelete}
                         >
-                            <img src={delimg}/>
+                            <img src={delimg} />
                         </button>
                     </div>
                 </>
