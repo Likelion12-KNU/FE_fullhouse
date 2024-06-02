@@ -6,7 +6,7 @@ import EditForm from "./EditForm";
 
 // content -> contents - by choigw
 function Post({ id, title, contents, likes }) {
-    const [like, setLike] = useState(likes);
+    const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const handleEdit = () => {
         setEditing(true);
@@ -24,8 +24,7 @@ function Post({ id, title, contents, likes }) {
     };
 
     const handleLike = () => {
-        setLike(like+1);
-        console.log(id+" "+like);
+        setStateLike((prev) => prev+1);
         //PUT : like - back 미구현 240602
         // fetch(`${baseUrl}/${id}`, {
         //     method: "PUT",
@@ -55,7 +54,7 @@ function Post({ id, title, contents, likes }) {
                         <button onClick={handleLike}>
                             좋아요
                         </button>
-                        <span> {likes}개</span>
+                        <span> {stateLike}개</span>
                     </div>
                     <div className="flex justify-end mt-4">
                         <button onClick={handleEdit}>
