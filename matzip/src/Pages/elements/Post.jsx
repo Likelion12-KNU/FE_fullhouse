@@ -8,14 +8,6 @@ import EditForm from "./EditForm";
 function Post({ id, title, contents }) {
     const [isEditing, setEditing] = useState(false);
     const handleEdit = () => {
-        // fetch(`${baseUrl}/${id}`, {
-        //     method: "PUT",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({
-        //         title: "수정 제목",
-        //         contents: "수정 내용"
-        //       })
-        // }).then(() => getPosts());
         setEditing(true);
     };
 

@@ -12,7 +12,6 @@ function PostList() {
   const posts = useAtomValue(postsAtom);
 
   // 처음 랜더링 될때만 실행
-  // useEffect 를 쓰지 않는다면 어떻게 될까요? 
   useEffect(() => { getPosts(); }, []);
 
   return (
