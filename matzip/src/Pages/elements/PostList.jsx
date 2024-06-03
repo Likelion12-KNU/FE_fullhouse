@@ -7,7 +7,7 @@ import "../../style/PostList.css"
 
 function PostList() {
   /*
-        { id: number, title: string, contents: string }
+        { id: number, title: string, contents: string, like: number }
   */
   const posts = useAtomValue(postsAtom);
 
@@ -19,7 +19,7 @@ function PostList() {
       <div className="cover">
       {posts.boardLists && posts.boardLists.map((v, index) => (
         // content -> contents - by choigw
-        <Post key={index} id={v.id} title={v.title} contents={v.contents} className="post" />
+        <Post key={index} id={v.id} title={v.title} contents={v.contents} likes={v.likes} className="post" />
       ))}
       </div>
     </div>

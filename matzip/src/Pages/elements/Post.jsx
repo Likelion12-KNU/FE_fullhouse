@@ -7,7 +7,8 @@ import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
 
 // content -> contents - by choigw
-function Post({ id, title, contents }) {
+function Post({ id, title, contents, likes }) {
+    const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const handleEdit = () => {
         setEditing(true);
@@ -23,6 +24,17 @@ function Post({ id, title, contents }) {
             headers: { "Content-Type": "application/json" }
         }).then(() => getPosts());
     };
+
+    const handleLike = () => {
+        setStateLike((prev) => prev + 1);
+        // PUT : like - back 미구현 240602
+        fetch(`${baseUrl}/likes/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" }
+        }).then(() => getPosts());
+    }
+
+
     return (
         <div className={style.post}>
             {isEditing ? (
@@ -38,17 +50,24 @@ function Post({ id, title, contents }) {
                     <p>{contents}</p>
 
                     <div className={style.edit}>
+                        <span> {stateLike}개</span>
+                        <button
+                            className={style.l}
+                            onClick={handleLike}
+                        >
+                            LIKE
+                        </button>
                         <button
                             className={style.e}
                             onClick={handleEdit}
                         >
-                            <img src={editimg}/>
+                            <img src={editimg} />
                         </button>
                         <button
                             className={style.d}
                             onClick={handleDelete}
                         >
-                            <img src={delimg}/>
+                            <img src={delimg} />
                         </button>
                     </div>
                 </>
