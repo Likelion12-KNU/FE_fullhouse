@@ -5,6 +5,8 @@ import { getPosts } from "../../func/request";
 import EditForm from "./EditForm";
 import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
+import likeimg from "../../img/like_empty.png"
+//import CommentList from './CommentList';
 
 // content -> contents - by choigw
 function Post({ id, title, contents, likes }) {
@@ -48,15 +50,15 @@ function Post({ id, title, contents, likes }) {
                 <>
                     <h2>{title}</h2>
                     <p>{contents}</p>
-
+                    <button
+                        className={style.l}
+                        onClick={handleLike}
+                    >
+                        <img src={likeimg} className={style.likeIcon}/>
+                    </button>
+                    <span> {stateLike} likes</span>
+                    {/* <CommentList/> */}
                     <div className={style.edit}>
-                        <span> {stateLike}개</span>
-                        <button
-                            className={style.l}
-                            onClick={handleLike}
-                        >
-                            LIKE
-                        </button>
                         <button
                             className={style.e}
                             onClick={handleEdit}
