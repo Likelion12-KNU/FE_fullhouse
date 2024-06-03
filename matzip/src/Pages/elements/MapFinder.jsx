@@ -2,74 +2,98 @@ import React, { useState, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 /**
- * 구현 중임 아주 화남 매우 화남
- * @returns 성질머리
+ * PostForm > MapFinder
+ * 지도 검색 기능
  */
 function MapFinder() {
     const [info, setInfo] = useState(null);
     const [markers, setMarkers] = useState([]);
     const [map, setMap] = useState(null);
-
-    const kakaoApiKey = import.meta.env.VITE_KAKAOMAP_API;
+    const [keyword, setKeyword] = useState("강대 맛집");
+    const [select, setSelect] = useState("강원대학교");
+    const [latlng, setLatlng] = useState([37.86945254603451, 127.74403884881542]);
 
     useEffect(() => {
-        if (!map) return;
+        const ps = new window.kakao.maps.services.Places(); // 검색 객체
 
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&libraries=services`;
-        document.head.appendChild(script);
+        ps.keywordSearch(keyword, (data, status, _pagination) => {
+            if (status === kakao.maps.services.Status.OK) {
+                const bounds = new kakao.maps.LatLngBounds();
+                let markers = []
 
-        script.onload = () => {
-            const ps = new window.kakao.maps.services.Places();
-
-            ps.keywordSearch("강대 맛집", (data, status, _pagination) => {
-                if (status === kakao.maps.services.Status.OK) {
-                    const bounds = new kakao.maps.LatLngBounds();
-                    const newMarkers = data.map(place => ({
+                data.forEach(place => {
+                    markers.push({
                         position: {
                             lat: place.y,
                             lng: place.x,
                         },
-                        content: place.place_name,
-                    }));
-
-                    newMarkers.forEach(marker => {
-                        bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng));
+                        content: place.place_name
                     });
+                    bounds.extend(new kakao.maps.LatLng(place.y, place.x));
+                });
 
-                    setMarkers(newMarkers);
-                    map.setBounds(bounds);
-                }
-            });
-        };
-    }, [map, kakaoApiKey]);
+                setMarkers(markers);
+                map.setBounds(bounds);
+            } else {
+                console.error('Error:', status);
+            }
+        })
+    }, [map, keyword]);
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        console.log(event);
+        const newKeyword = event.target.keyword.value;
+        setKeyword(newKeyword);
+    };
+
+    const handleMarkerClick = (marker) => {
+        console.log('가게 이름:', marker.content);
+        console.log('위치:', marker.position.lat, marker.position.lng);
+        setSelect(marker.content);
+        setLatlng([marker.position.lat, marker.position.lng]);
+        // console.log('주소:', marker);
+        setInfo(marker);
+    };
 
     return (
-        <Map
-            center={{
-                lat: 37.566826,
-                lng: 126.9786567,
-            }}
-            style={{
-                width: "100%",
-                height: "350px",
-            }}
-            level={3}
-            onCreate={setMap}
-        >
-            {markers.map(marker => (
-                <MapMarker
-                    key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-                    position={marker.position}
-                    onClick={() => setInfo(marker)}
-                >
-                    {info && info.content === marker.content && (
-                        <div style={{ color: "#000" }}>{marker.content}</div>
-                    )}
-                </MapMarker>
-            ))}
-        </Map>
+        <>
+            <div>
+                <input
+                    type="text"
+                    name="keyword"
+                    className="keyword"
+                    placeholder="검색"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                />
+                <button onClick={handleSearch}>검색</button>
+            </div>
+            <Map
+                center={{
+                    lat: 37.566826,
+                    lng: 126.9786567,
+                }}
+                style={{                // 스타일 따로 설정해줘야 함
+                    width: "100%",
+                    height: "350px",
+                }}
+                level={3}
+                onCreate={setMap}
+            >
+                {markers.map(marker => (
+                    <MapMarker
+                        key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                        position={marker.position}
+                        onClick={() => handleMarkerClick(marker)}
+                    >
+                        {info && info.content === marker.content && (
+                            <div style={{ color: "#000" }}>{marker.content}</div>
+                        )}
+                    </MapMarker>
+                ))}
+            </Map>
+        </>
     );
 }
 
