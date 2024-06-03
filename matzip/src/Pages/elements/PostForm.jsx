@@ -2,6 +2,7 @@ import { baseUrl, query } from "../../config/const";
 import { useState } from "react";
 import { getPosts } from "../../func/request";
 import "../../style/PostForm.css"
+import MapFinder from "./MapFinder";
 
 function PostForm() {
   // 상태 관리를 위한 useState 훅 사용
@@ -58,6 +59,7 @@ function PostForm() {
             onChange={(e) => setContents(e.target.value)}
             className="text"
           ></textarea>
+          <MapFinder />
         </div>
         <div className="btn">
           <button type="submit">

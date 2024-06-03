@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 /**
- * 구현 중임 아주 화남 매우 화남
+ * PostForm > MapFinder
+ * 지도 검색 기능
  * @returns 성질머리
  */
 function MapFinder() {
@@ -13,37 +14,31 @@ function MapFinder() {
     const kakaoApiKey = import.meta.env.VITE_KAKAOMAP_API;
 
     useEffect(() => {
-        if (!map) return;
+        const ps = new window.kakao.maps.services.Places();
 
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&libraries=services`;
-        document.head.appendChild(script);
+        ps.keywordSearch("강대 맛집", (data, status, _pagination) => {
+            if (status === kakao.maps.services.Status.OK) {
+                const bounds = new kakao.maps.LatLngBounds();
+                let markers = []
 
-        script.onload = () => {
-            const ps = new window.kakao.maps.services.Places();
-
-            ps.keywordSearch("강대 맛집", (data, status, _pagination) => {
-                if (status === kakao.maps.services.Status.OK) {
-                    const bounds = new kakao.maps.LatLngBounds();
-                    const newMarkers = data.map(place => ({
+                for (var i = 0; i < data.length; i++) {
+                    // @ts-ignore
+                    markers.push({
                         position: {
-                            lat: place.y,
-                            lng: place.x,
+                            lat: data[i].y,
+                            lng: data[i].x,
                         },
-                        content: place.place_name,
-                    }));
-
-                    newMarkers.forEach(marker => {
-                        bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng));
-                    });
-
-                    setMarkers(newMarkers);
-                    map.setBounds(bounds);
+                        content: data[i].place_name
+                    })
+                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
                 }
-            });
-        };
-    }, [map, kakaoApiKey]);
+                setMarkers(markers)
+
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                map.setBounds(bounds)
+            }
+        })
+    }, [map]);
 
     return (
         <Map
