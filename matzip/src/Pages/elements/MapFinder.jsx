@@ -4,67 +4,96 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 /**
  * PostForm > MapFinder
  * 지도 검색 기능
- * @returns 성질머리
  */
 function MapFinder() {
     const [info, setInfo] = useState(null);
     const [markers, setMarkers] = useState([]);
     const [map, setMap] = useState(null);
-
-    const kakaoApiKey = import.meta.env.VITE_KAKAOMAP_API;
+    const [keyword, setKeyword] = useState("강대 맛집");
+    const [select, setSelect] = useState("강원대학교");
+    const [latlng, setLatlng] = useState([37.86945254603451, 127.74403884881542]);
 
     useEffect(() => {
-        const ps = new window.kakao.maps.services.Places();
+        const ps = new window.kakao.maps.services.Places(); // 검색 객체
 
-        ps.keywordSearch("강대 맛집", (data, status, _pagination) => {
+        ps.keywordSearch(keyword, (data, status, _pagination) => {
             if (status === kakao.maps.services.Status.OK) {
                 const bounds = new kakao.maps.LatLngBounds();
                 let markers = []
 
-                for (var i = 0; i < data.length; i++) {
-                    // @ts-ignore
+                data.forEach(place => {
                     markers.push({
                         position: {
-                            lat: data[i].y,
-                            lng: data[i].x,
+                            lat: place.y,
+                            lng: place.x,
                         },
-                        content: data[i].place_name
-                    })
-                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
-                }
-                setMarkers(markers)
+                        content: place.place_name
+                    });
+                    bounds.extend(new kakao.maps.LatLng(place.y, place.x));
+                });
 
-                // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-                map.setBounds(bounds)
+                setMarkers(markers);
+                map.setBounds(bounds);
+            } else {
+                console.error('Error:', status);
             }
         })
-    }, [map]);
+    }, [map, keyword]);
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        console.log(event);
+        const newKeyword = event.target.keyword.value;
+        setKeyword(newKeyword);
+    };
+
+    const handleMarkerClick = (marker) => {
+        console.log('가게 이름:', marker.content);
+        console.log('위치:', marker.position.lat, marker.position.lng);
+        setSelect(marker.content);
+        setLatlng([marker.position.lat, marker.position.lng]);
+        // console.log('주소:', marker);
+        setInfo(marker);
+    };
 
     return (
-        <Map
-            center={{
-                lat: 37.566826,
-                lng: 126.9786567,
-            }}
-            style={{
-                width: "100%",
-                height: "350px",
-            }}
-            level={3}
-            onCreate={setMap}
-        >
-            {markers.map(marker => (
-                <MapMarker
-                    key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-                    position={marker.position}
-                    onClick={() => setInfo(marker)}
-                >
-                    {info && info.content === marker.content && (
-                        <div style={{ color: "#000" }}>{marker.content}</div>
-                    )}
-                </MapMarker>
-            ))}
-        </Map>
+        <>
+            <div>
+                <input
+                    type="text"
+                    name="keyword"
+                    className="keyword"
+                    placeholder="검색"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                />
+                <button onClick={handleSearch}>검색</button>
+            </div>
+            <Map
+                center={{
+                    lat: 37.566826,
+                    lng: 126.9786567,
+                }}
+                style={{                // 스타일 따로 설정해줘야 함
+                    width: "100%",
+                    height: "350px",
+                }}
+                level={3}
+                onCreate={setMap}
+            >
+                {markers.map(marker => (
+                    <MapMarker
+                        key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                        position={marker.position}
+                        onClick={() => handleMarkerClick(marker)}
+                    >
+                        {info && info.content === marker.content && (
+                            <div style={{ color: "#000" }}>{marker.content}</div>
+                        )}
+                    </MapMarker>
+                ))}
+            </Map>
+        </>
     );
 }
 
