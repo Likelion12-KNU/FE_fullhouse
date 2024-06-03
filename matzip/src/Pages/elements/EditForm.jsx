@@ -3,10 +3,11 @@ import { useState } from "react";
 import { getPosts } from "../../func/request";
 import "../../style/PostForm.css"
 
-function EditForm({ id, curtitle, curcontents, onClose }) {
+function EditForm({ id, curtitle, curcontents, curpos, onClose }) {
   // 상태 관리를 위한 useState 훅 사용
   const [title, setTitle] = useState(curtitle);
   const [contents, setContents] = useState(curcontents);
+  const [latlng, setLatlng] = useState(curpos);
 
   // 폼 수정 이벤트 핸들러
   const handleSubmit = (event) => {
@@ -19,7 +20,11 @@ function EditForm({ id, curtitle, curcontents, onClose }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: title,
-          contents: contents
+          contents: contents,
+          coordinate: {
+            latitude: latlng[0],
+            longitude: latlng[1]
+          }
         })
       }
     ).then(() => {
