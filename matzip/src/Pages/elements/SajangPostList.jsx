@@ -5,13 +5,14 @@ import { postsAtom } from "../../state/atom";
 import { getPosts } from "../../func/request";
 import "../../style/PostList.css"
 
-function PostList() {
+function SajangPostList() {
   /*
-        { id: number, title: string, contents: string, like: number }
+        { id: number, title: string, contents: string }
   */
   const posts = useAtomValue(postsAtom);
 
   // 처음 랜더링 될때만 실행
+  // useEffect 를 쓰지 않는다면 어떻게 될까요? 
   useEffect(() => { getPosts(); }, []);
 
   return (
@@ -19,11 +20,11 @@ function PostList() {
       <div className="cover">
       {posts.boardLists && posts.boardLists.map((v, index) => (
         // content -> contents - by choigw
-        <Post key={index} id={v.id} title={v.title} contents={v.contents} likes={v.likes} className="post" />
+        <Post key={index} id={v.id} title={v.title} contents={v.contents} />
       ))}
       </div>
     </div>
   );
 }
 
-export default PostList;
+export default SajangPostList;

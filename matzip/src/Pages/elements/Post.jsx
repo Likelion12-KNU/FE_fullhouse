@@ -5,19 +5,14 @@ import { getPosts } from "../../func/request";
 import EditForm from "./EditForm";
 import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
+import likeimg from "../../img/like_empty.png"
+//import CommentList from './CommentList';
 
 // content -> contents - by choigw
-function Post({ id, title, contents }) {
+function Post({ id, title, contents, likes }) {
+    const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const handleEdit = () => {
-        // fetch(`${baseUrl}/${id}`, {
-        //     method: "PUT",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({
-        //         title: "수정 제목",
-        //         contents: "수정 내용"
-        //       })
-        // }).then(() => getPosts());
         setEditing(true);
     };
 
@@ -31,6 +26,17 @@ function Post({ id, title, contents }) {
             headers: { "Content-Type": "application/json" }
         }).then(() => getPosts());
     };
+
+    const handleLike = () => {
+        setStateLike((prev) => prev + 1);
+        // PUT : like - back 미구현 240602
+        fetch(`${baseUrl}/likes/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" }
+        }).then(() => getPosts());
+    }
+
+
     return (
         <div className={style.post}>
             {isEditing ? (
@@ -44,19 +50,26 @@ function Post({ id, title, contents }) {
                 <>
                     <h2>{title}</h2>
                     <p>{contents}</p>
-
+                    <button
+                        className={style.l}
+                        onClick={handleLike}
+                    >
+                        <img src={likeimg} className={style.likeIcon}/>
+                    </button>
+                    <span> {stateLike} likes</span>
+                    {/* <CommentList/> */}
                     <div className={style.edit}>
                         <button
                             className={style.e}
                             onClick={handleEdit}
                         >
-                            <img src={editimg}/>
+                            <img src={editimg} />
                         </button>
                         <button
                             className={style.d}
                             onClick={handleDelete}
                         >
-                            <img src={delimg}/>
+                            <img src={delimg} />
                         </button>
                     </div>
                 </>
