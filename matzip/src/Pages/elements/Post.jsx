@@ -6,12 +6,15 @@ import EditForm from "./EditForm";
 import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
 import likeimg from "../../img/like_empty.png"
-//import CommentList from './CommentList';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 // content -> contents - by choigw
 function Post({ id, title, contents, likes }) {
     const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
+    const [map, setMap] = useState(null);
+    const point = [37.566826, 126.9786567];
+
     const handleEdit = () => {
         setEditing(true);
     };
@@ -29,7 +32,6 @@ function Post({ id, title, contents, likes }) {
 
     const handleLike = () => {
         setStateLike((prev) => prev + 1);
-        // PUT : like - back 미구현 240602
         fetch(`${baseUrl}/likes/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" }
@@ -50,11 +52,35 @@ function Post({ id, title, contents, likes }) {
                 <>
                     <h2>{title}</h2>
                     <p>{contents}</p>
+                    {/* <div className='map_wrap'> */}
+                        {/* <h3>서울시청</h3>
+                        <p>주소</p> */}
+                        <Map
+                            center={{
+                                lat: point[0],
+                                lng: point[1]
+                            }}
+                            style={{                // 스타일 따로 설정해줘야 함
+                                width: "100%",
+                                height: "150px",
+                            }}
+                            level={5}
+                            draggable={false}
+                            onCreate={setMap}
+                        >
+                            <MapMarker // 마커를 생성합니다
+                                position={{
+                                    lat: point[0],
+                                    lng: point[1]
+                                }}
+                            />
+                        </Map>
+                    {/* </div> */}
                     <button
                         className={style.l}
                         onClick={handleLike}
                     >
-                        <img src={likeimg} className={style.likeIcon}/>
+                        <img src={likeimg} className={style.likeIcon} />
                     </button>
                     <span> {stateLike} likes</span>
                     {/* <CommentList/> */}
