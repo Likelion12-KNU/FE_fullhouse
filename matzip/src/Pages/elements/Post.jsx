@@ -27,14 +27,11 @@ function Post({ id, title, contents, likes }) {
 
     const handleLike = () => {
         setStateLike((prev) => prev + 1);
-        //PUT : like - back 미구현 240602
-        // fetch(`${baseUrl}/${id}`, {
-        //     method: "PUT",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({
-        //         likes: like
-        //     })
-        // }).then(() => getPosts());
+        // PUT : like - back 미구현 240602
+        fetch(`${baseUrl}/likes/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" }
+        }).then(() => getPosts());
     }
 
 
