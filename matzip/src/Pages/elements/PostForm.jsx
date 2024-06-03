@@ -2,7 +2,6 @@ import { baseUrl, query } from "../../config/const";
 import { useState } from "react";
 import { getPosts } from "../../func/request";
 import "../../style/PostForm.css"
-// import Post from "../../components/PostList/Post/Post";
 
 function PostForm() {
   // 상태 관리를 위한 useState 훅 사용
