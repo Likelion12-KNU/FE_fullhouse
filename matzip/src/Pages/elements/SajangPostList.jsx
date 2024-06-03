@@ -5,7 +5,7 @@ import { postsAtom } from "../../state/atom";
 import { getPosts } from "../../func/request";
 import "../../style/PostList.css"
 
-function PostList() {
+function SajangPostList() {
   /*
         { id: number, title: string, contents: string }
   */
@@ -27,4 +27,4 @@ function PostList() {
   );
 }
 
-export default PostList;
+export default SajangPostList;
