@@ -24,7 +24,7 @@ function Post({ id, title, contents, likes, pos }) {
     }
 
     const handleDelete = () => {
-        fetch(`${baseUrl}/${id}`, {
+        fetch(`${baseUrl}/boards/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" }
         }).then(() => getPosts());
@@ -32,7 +32,7 @@ function Post({ id, title, contents, likes, pos }) {
 
     const handleLike = () => {
         setStateLike((prev) => prev + 1);
-        fetch(`${baseUrl}/likes/${id}`, {
+        fetch(`${baseUrl}/boards/likes/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" }
         }).then(() => getPosts());

@@ -13,8 +13,8 @@ function EditForm({ id, curtitle, curcontents, curpos, onClose }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // [PUT] ${baseUrl}/${id}
-    fetch(`${baseUrl}/${id}`,
+    // [PUT] ${baseUrl}/boards/${id}
+    fetch(`${baseUrl}/boards/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

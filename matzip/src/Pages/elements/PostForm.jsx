@@ -18,8 +18,8 @@ function PostForm() {
     setTitle("");
     setContents("");
 
-    // [POST] ${baseUrl}/posts
-    fetch(`${baseUrl}`,
+    // [POST] ${baseUrl}/boards/posts
+    fetch(`${baseUrl}/boards`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
