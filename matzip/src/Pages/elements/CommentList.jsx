@@ -1,29 +1,22 @@
 import Comment from "./Comment";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { postsAtom } from "../../state/atom";
 import { getPosts } from "../../func/request";
-import "../../style/PostList.css"
+import style from "../../style/CommentList.module.css"
+//import Comment from "./Comment.jsx";
 
 function CommentList() {
-  /*
-        { id: number, title: string, contents: string, like: number }
-  */
-  const posts = useAtomValue(postsAtom);
-
-  // 처음 랜더링 될때만 실행
-  useEffect(() => { getPosts(); }, []);
-
-  return (
-    <div className="clist">
-      <div className="cover">
-      {posts.boardLists.commentLists && posts.boardLists.commentLists.map((v, index) => (
-        // content -> contents - by choigw
-        <Comment key={index} className="comment" id={v.comment_id} contents={v.contents} />
-      ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="commentCover">
+        <Comment content="댓글1"/>
+        <Comment content="댓글2"/>
+        <Comment content="댓글1"/>
+        <Comment content="댓글2"/>
+        <Comment content="댓글1"/>
+        <Comment content="댓글2"/>
+        </div>
+    );
 }
 
 export default CommentList;

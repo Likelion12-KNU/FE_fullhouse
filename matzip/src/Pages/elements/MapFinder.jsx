@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import style from "../../style/MapFinder.module.css"
 
 /**
  * PostForm > MapFinder
@@ -9,7 +10,7 @@ function MapFinder({setSelect, setLatlng}) {
     const [info, setInfo] = useState(null);
     const [markers, setMarkers] = useState([]);
     const [map, setMap] = useState(null);
-    const [keyword, setKeyword] = useState("강대 맛집");
+    const [keyword, setKeyword] = useState("");
     // const [select, setSelect] = useState("강원대학교");
     // const [latlng, setLatlng] = useState([37.86945254603451, 127.74403884881542]);
 
@@ -58,16 +59,16 @@ function MapFinder({setSelect, setLatlng}) {
 
     return (
         <>
-            <div>
+            <div className={style.mapsearch}>
                 <input
                     type="text"
                     name="keyword"
-                    className="keyword"
+                    className={style.key}
                     placeholder="검색"
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                 />
-                <button onClick={handleSearch}>검색</button>
+                <button onClick={handleSearch} className={style.mapbutton}/>
             </div>
             <Map
                 center={{

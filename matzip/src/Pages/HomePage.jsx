@@ -7,7 +7,7 @@ import { getPosts } from "../func/request";
 
 function HomePage() {
     const posts = useAtomValue(postsAtom);
-
+    
     useEffect(() => { 
         getPosts(); 
     }, []);

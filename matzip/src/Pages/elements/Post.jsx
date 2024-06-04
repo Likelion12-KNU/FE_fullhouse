@@ -6,6 +6,8 @@ import EditForm from "./EditForm";
 import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
 import likeimg from "../../img/like_empty.png"
+import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Comment from "./Comment";
 
@@ -68,8 +70,15 @@ function Post({ id, title, contents, likes, placename, pos, commentLists}) {
                 />
             ) : (
                 <>
-                    <h2>{title}</h2>
+                    <h2 className={style.posth2}>{title}</h2>
                     <p className='contents'>{contents}</p>
+                    <button
+                        className={style.l}
+                        onClick={handleLike}
+                    >
+                        <img src={likeimg} className={style.likeIcon} />
+                    </button>
+                    <span> {stateLike} likes</span>
                     <div className='map_wrap'>
                         <h3 className='placename'>{placename}</h3>
                         <p className='address'>{address}</p>
@@ -94,14 +103,8 @@ function Post({ id, title, contents, likes, placename, pos, commentLists}) {
                             />
                         </Map>
                     </div>
-                    <button
-                        className={style.l}
-                        onClick={handleLike}
-                    >
-                        <img src={likeimg} className={style.likeIcon} />
-                    </button>
-                    <span> {stateLike} likes</span>
-                    {/* <CommentList/> */}
+                    <CommentList/>
+                    <CommentForm/>
                     <div className={style.edit}>
                         <button
                             className={style.e}
