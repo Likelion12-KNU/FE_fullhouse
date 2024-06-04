@@ -20,7 +20,17 @@ function SajangPostList() {
       <div className="cover">
       {posts.boardLists && posts.boardLists.map((v, index) => (
         // content -> contents - by choigw
-        <Post key={index} id={v.id} title={v.title} contents={v.contents} pos={[v.coordinate.latitude, v.coordinate.longitude]} />
+        <Post
+            key={index}
+            className="post"
+            id={v.id}
+            title={v.title}
+            contents={v.contents}
+            likes={v.likes}
+            placename={v.storeName}
+            pos={[v.coordinate.latitude, v.coordinate.longitude]}
+            commentLists={v.commentLists}
+          />
       ))}
       </div>
     </div>

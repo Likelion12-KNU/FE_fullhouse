@@ -13,7 +13,17 @@ function SearchPostList({ posts }) {
     <div className="list">
       <div className="cover">
         {posts && posts.map((v, index) => (
-          <Post key={index} id={v.id} title={v.title} contents={v.contents} className="post" pos={[v.coordinate.latitude, v.coordinate.longitude]} />
+          <Post
+          key={index}
+          className="post"
+          id={v.id}
+          title={v.title}
+          contents={v.contents}
+          likes={v.likes}
+          placename={v.storeName}
+          pos={[v.coordinate.latitude, v.coordinate.longitude]}
+          commentLists={v.commentLists}
+        />
         ))}
       </div>
     </div>

@@ -26,6 +26,7 @@ function PostList() {
             title={v.title}
             contents={v.contents}
             likes={v.likes}
+            placename={v.storeName}
             pos={[v.coordinate.latitude, v.coordinate.longitude]}
             commentLists={v.commentLists}
           />

@@ -7,10 +7,11 @@ import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
 import likeimg from "../../img/like_empty.png"
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import Comment from "./Comment";
 
 // content -> contents - by choigw
 
-function Post({ id, title, contents, likes, /*placename, */pos, commentLists}) {
+function Post({ id, title, contents, likes, placename, pos, commentLists}) {
     const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const [map, setMap] = useState(null);
@@ -70,7 +71,7 @@ function Post({ id, title, contents, likes, /*placename, */pos, commentLists}) {
                     <h2>{title}</h2>
                     <p className='contents'>{contents}</p>
                     <div className='map_wrap'>
-                        {/* <h3>{placename}</h3>*/}
+                        <h3 className='placename'>{placename}</h3>
                         <p className='address'>{address}</p>
                         <Map
                             center={{

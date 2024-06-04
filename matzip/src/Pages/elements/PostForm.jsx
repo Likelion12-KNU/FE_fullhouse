@@ -30,8 +30,7 @@ function PostForm() {
             latitude: latlng[0],
             longitude: latlng[1]
           },
-          // select: select
-          
+          storeName: select
         })
       }
     ).then(() => getPosts());
