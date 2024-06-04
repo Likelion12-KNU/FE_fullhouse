@@ -29,7 +29,8 @@ function PostForm() {
           coordinate: {
             latitude: latlng[0],
             longitude: latlng[1]
-          }
+          },
+          // select: select
           
         })
       }

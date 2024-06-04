@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../../style/Post.module.css';
 import { baseUrl } from "../../config/const";
 import { getPosts } from "../../func/request";
@@ -9,11 +9,25 @@ import likeimg from "../../img/like_empty.png"
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 // content -> contents - by choigw
-function Post({ id, title, contents, likes, pos, commentLists }) {
+
+function Post({ id, title, contents, likes, /*placename, */pos, commentLists}) {
     const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const [map, setMap] = useState(null);
+    const [address, setAddress] = useState('');
     const point = pos;
+
+    useEffect(() => {
+        // reverse-Geocoding
+        const geocoder = new window.kakao.maps.services.Geocoder();
+        const coord = new window.kakao.maps.LatLng(point[0], point[1]);
+        const callback = (result, status) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+                setAddress(result[0].address.address_name);
+            }
+        };
+        geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+    }, [point]);
 
     const handleEdit = () => {
         setEditing(true);
@@ -54,10 +68,10 @@ function Post({ id, title, contents, likes, pos, commentLists }) {
             ) : (
                 <>
                     <h2>{title}</h2>
-                    <p>{contents}</p>
-                    {/* <div className='map_wrap'> */}
-                        {/* <h3>서울시청</h3>
-                        <p>주소</p> */}
+                    <p className='contents'>{contents}</p>
+                    <div className='map_wrap'>
+                        {/* <h3>{placename}</h3>*/}
+                        <p className='address'>{address}</p>
                         <Map
                             center={{
                                 lat: point[0],
@@ -67,7 +81,7 @@ function Post({ id, title, contents, likes, pos, commentLists }) {
                                 width: "100%",
                                 height: "150px",
                             }}
-                            level={5}
+                            level={3}
                             draggable={false}
                             onCreate={setMap}
                         >
@@ -78,7 +92,7 @@ function Post({ id, title, contents, likes, pos, commentLists }) {
                                 }}
                             />
                         </Map>
-                    {/* </div> */}
+                    </div>
                     <button
                         className={style.l}
                         onClick={handleLike}

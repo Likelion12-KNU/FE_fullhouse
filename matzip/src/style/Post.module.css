@@ -32,7 +32,7 @@
     transition: all 0.3s ease;
 }
 
-.post p {
+.post>p {
     background-color: white;
     width: 100%;
     padding: 20px;
