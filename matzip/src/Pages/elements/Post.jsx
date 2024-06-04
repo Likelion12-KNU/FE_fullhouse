@@ -9,11 +9,11 @@ import likeimg from "../../img/like_empty.png"
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 // content -> contents - by choigw
-function Post({ id, title, contents, likes }) {
+function Post({ id, title, contents, likes, pos }) {
     const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const [map, setMap] = useState(null);
-    const point = [37.566826, 126.9786567];
+    const point = pos;
 
     const handleEdit = () => {
         setEditing(true);
@@ -46,6 +46,7 @@ function Post({ id, title, contents, likes }) {
                     id={id}
                     curtitle={title}
                     curcontents={contents}
+                    curpos={pos}
                     onClose={handleCloseForm}
                 />
             ) : (

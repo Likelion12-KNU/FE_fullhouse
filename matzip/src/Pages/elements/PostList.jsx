@@ -19,7 +19,7 @@ function PostList() {
       <div className="cover">
       {posts.boardLists && posts.boardLists.map((v, index) => (
         // content -> contents - by choigw
-        <Post key={index} id={v.id} title={v.title} contents={v.contents} likes={v.likes} className="post" />
+        <Post key={index} className="post" id={v.id} title={v.title} contents={v.contents} likes={v.likes} pos={[v.coordinate.latitude, v.coordinate.longitude]} />
       ))}
       </div>
     </div>

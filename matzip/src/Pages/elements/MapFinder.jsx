@@ -5,13 +5,13 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
  * PostForm > MapFinder
  * 지도 검색 기능
  */
-function MapFinder() {
+function MapFinder({setSelect, setLatlng}) {
     const [info, setInfo] = useState(null);
     const [markers, setMarkers] = useState([]);
     const [map, setMap] = useState(null);
     const [keyword, setKeyword] = useState("강대 맛집");
-    const [select, setSelect] = useState("강원대학교");
-    const [latlng, setLatlng] = useState([37.86945254603451, 127.74403884881542]);
+    // const [select, setSelect] = useState("강원대학교");
+    // const [latlng, setLatlng] = useState([37.86945254603451, 127.74403884881542]);
 
     useEffect(() => {
         const ps = new window.kakao.maps.services.Places(); // 검색 객체

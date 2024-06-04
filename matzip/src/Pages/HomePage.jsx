@@ -21,7 +21,7 @@ function HomePage() {
             <h1 className='h1'>Recent Posts</h1>
             <div className="posts">
                 {recentPosts.map((post, index) => (
-                    <Post key={index} id={post.id} title={post.title} contents={post.contents} className="post" />
+                    <Post key={index} id={post.id} title={post.title} contents={post.contents} className="post" pos={[post.coordinate.latitude, post.coordinate.longitude]} />
                 ))}
             </div>
         </div>
