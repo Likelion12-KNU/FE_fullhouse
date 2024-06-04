@@ -31,7 +31,7 @@ label {
     padding-right: 10px;
 }
 
-button {
+.postFormButton {
     width: 70px;
     height: 40px;
     border: none; /* 테두리 제거 */

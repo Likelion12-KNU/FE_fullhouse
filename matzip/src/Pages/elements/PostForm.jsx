@@ -60,7 +60,7 @@ function PostForm() {
           ></textarea>
         </div>
         <div className="btn">
-          <button type="submit">
+          <button type="submit" className="postFormButton">
             전송
           </button>
         </div>

@@ -6,7 +6,8 @@ import EditForm from "./EditForm";
 import editimg from '../../img/edit.png'
 import delimg from "../../img/delete.png"
 import likeimg from "../../img/like_empty.png"
-//import CommentList from './CommentList';
+import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 
 // content -> contents - by choigw
 function Post({ id, title, contents, likes }) {
@@ -29,7 +30,6 @@ function Post({ id, title, contents, likes }) {
 
     const handleLike = () => {
         setStateLike((prev) => prev + 1);
-        // PUT : like - back 미구현 240602
         fetch(`${baseUrl}/likes/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" }
@@ -48,8 +48,8 @@ function Post({ id, title, contents, likes }) {
                 />
             ) : (
                 <>
-                    <h2>{title}</h2>
-                    <p>{contents}</p>
+                    <h2 className={style.posth2}>{title}</h2>
+                    <p className={style.postp}>{contents}</p>
                     <button
                         className={style.l}
                         onClick={handleLike}
@@ -57,7 +57,8 @@ function Post({ id, title, contents, likes }) {
                         <img src={likeimg} className={style.likeIcon}/>
                     </button>
                     <span> {stateLike} likes</span>
-                    {/* <CommentList/> */}
+                    <CommentList/>
+                    <CommentForm/>
                     <div className={style.edit}>
                         <button
                             className={style.e}
