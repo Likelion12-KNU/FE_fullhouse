@@ -23,3 +23,7 @@
     width: 80%;
     height: 80%;
 }
+
+.newCommentSubmit:hover .sendImg {
+    content: url("../img/send_full.png")
+}
