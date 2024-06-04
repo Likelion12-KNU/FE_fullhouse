@@ -1,10 +1,10 @@
 import React from "react";
-import "../../style/Comment.css"
+import style from "../../style/Comment.module.css"
 
 function Comment({content}) {
     return (
-        <div className="co">
-            <p className="content">{content}</p>
+        <div className={style.co}>
+            <p className={style.content}>{content}</p>
         </div>
     );
 }

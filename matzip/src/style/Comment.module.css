@@ -1,0 +1,13 @@
+.co {
+    width:100%;
+    height: auto;
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.co .content {
+    word-break: break-all;
+}
