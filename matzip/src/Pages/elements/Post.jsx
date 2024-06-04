@@ -9,7 +9,7 @@ import likeimg from "../../img/like_empty.png"
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 // content -> contents - by choigw
-function Post({ id, title, contents, likes, pos }) {
+function Post({ id, title, contents, likes, pos, commentLists }) {
     const [stateLike, setStateLike] = useState(likes);
     const [isEditing, setEditing] = useState(false);
     const [map, setMap] = useState(null);
@@ -36,10 +36,12 @@ function Post({ id, title, contents, likes, pos }) {
             method: "PUT",
             headers: { "Content-Type": "application/json" }
         }).then(() => getPosts());
+        console.log(commentLists);
     }
 
 
     return (
+        <>
         <div className={style.post}>
             {isEditing ? (
                 <EditForm
@@ -99,9 +101,15 @@ function Post({ id, title, contents, likes, pos }) {
                             <img src={delimg} />
                         </button>
                     </div>
+                    <div className="comments">
+        {commentLists && commentLists.map(c => (
+            <Comment key={c.comment_id} contents={c.contents} />
+        ))}
+      </div>
                 </>
             )}
         </div>
+      </>
     );
 }
 export default Post;

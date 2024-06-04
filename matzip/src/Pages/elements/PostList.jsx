@@ -17,10 +17,19 @@ function PostList() {
   return (
     <div className="list">
       <div className="cover">
-      {posts.boardLists && posts.boardLists.map((v, index) => (
-        // content -> contents - by choigw
-        <Post key={index} className="post" id={v.id} title={v.title} contents={v.contents} likes={v.likes} pos={[v.coordinate.latitude, v.coordinate.longitude]} />
-      ))}
+        {posts.boardLists && posts.boardLists.map((v, index) => (
+          // content -> contents - by choigw
+          <Post
+            key={index}
+            className="post"
+            id={v.id}
+            title={v.title}
+            contents={v.contents}
+            likes={v.likes}
+            pos={[v.coordinate.latitude, v.coordinate.longitude]}
+            commentLists={v.commentLists}
+          />
+        ))}
       </div>
     </div>
   );
